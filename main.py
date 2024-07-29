@@ -1,7 +1,7 @@
 from typing import Union
 
 from fastapi import FastAPI, UploadFile
-form fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 
 import csv
 import json
