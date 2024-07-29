@@ -1,6 +1,7 @@
 from typing import Union
 
 from fastapi import FastAPI, UploadFile
+form fastapi.middleware.cors import CORSMiddleware
 
 import csv
 import json
@@ -26,6 +27,15 @@ def validate(postal_code):
 # Move this function to utils.py
 
 app = FastAPI()
+
+# accept every origin requests
+app.add_middleware(
+  CORSMiddleware,
+  allow_origins=['*'],
+  allow_methods=['*'],
+  allow_headers=['*'],
+)
+
 
 def make_json(csvFilePath, jsonFilePath):
      
@@ -91,16 +101,6 @@ def read_root(postcode: str):
   
   postal_code_data = get_postal_code_data(postcode)
   return postal_code_data
-  
-  # return {
-  #   "postal_code":postcode,
-  #   "country_code":"MX",
-  #   "city":"Edgewater",
-  #   "state":"New Jersey",
-  #   "state_code":"NJ",
-  #   "province":"Bergen",
-  #   "province_code":"003"
-  # },
 
 
 @app.get("/items/{item_id}")
